@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- Creating a base template that the other templates can extend -->
+{# django template comments #}
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"/>
+        <title>BlogMaker Lite</title>
+    </head>
+    <header>HEADER</header>
+    <body>
+        {# anchors indicating where stuff can be inserted #}
+        {% block bodyContent %}{% endblock bodyContent %}
+    </body>
+    <footer>FOOTER</footer>
+</html>
