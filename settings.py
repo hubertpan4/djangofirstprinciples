@@ -18,6 +18,8 @@ settings.configure(
 )
 ```
 
+Apparently running `python manage.py migrate` is impt whenever database related changes occur.
+
 """
 
 ROOT_URLCONF="blogmaker_lite" # instead of __name__ we now point to the main blogmaker_lite.py file
@@ -30,12 +32,36 @@ TEMPLATES=[
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [Path(__file__).parent / "templates"],
+        # adding stuff for admin stuff
+        "APP_DIRS": True, # tells django to also look for templates in the app specific 'templates' directories as well.
+        'OPTIONS': {
+            'context_processors': [ # processors are required to allow for auth on admin pages
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages'
+            ]
+        }
     }
 ]
 
-# Tells Django which "apps" ahve been isntalled to this project
+# Tells Django which "apps" have been isntalled to this project
 # each app corresponds to a folder, which also tells Django to where to look for each app's stuff
-INSTALLED_APPS = ["blogs"]
+INSTALLED_APPS = [
+    "blogs",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles"
+    ]
+
+# Middleware allows you to process requests at different points in the request-response cycle.
+MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
 
 # Django database configuration
 # in this case we tell Django to use SQLite by default backed with a single db.sqlite3 file
@@ -46,3 +72,4 @@ DATABASES={
     }
 }
 DEFAULT_AUTO_FIELD="django.db.models.BigAutoField"
+STATIC_URL = "static/"
