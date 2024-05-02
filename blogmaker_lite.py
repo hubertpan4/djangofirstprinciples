@@ -1,16 +1,10 @@
-from django.conf import settings
 from django.http import HttpResponse
 from django.urls import path
-from pathlib import Path
-import os 
-import django 
 from django.core.handlers.wsgi import WSGIHandler
 from django.core.management import execute_from_command_line
 from django.shortcuts import render
 
-# load settings from external settings.py
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
-django.setup()
+
 
 def index(request):
     """
@@ -31,7 +25,3 @@ urlpatterns = [
 ]
 
 application = WSGIHandler()
-
-if __name__ == "__main__":
-    execute_from_command_line()
-    # run this file with the command `python blogmaker_lite.py runserver`
