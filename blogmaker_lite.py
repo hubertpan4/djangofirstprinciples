@@ -1,17 +1,28 @@
 from django.conf import settings
 from django.http import HttpResponse
 from django.urls import path
+from pathlib import Path
 from django.core.handlers.wsgi import WSGIHandler
 from django.core.management import execute_from_command_line
+from django.shortcuts import render
 
 settings.configure(
     ROOT_URLCONF = __name__, # tells django where to find the urls it should listen to, in this case it is this file
     DEBUG=True, # tells django to show debugging info if something goes wrong 
-    SECRET_KEY="my-secret-key"
+    SECRET_KEY="my-secret-key",
+    TEMPLATES = [ # adding config for django templates
+        {
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "DIRS": [Path(__file__).parent / "templates"]
+        }
+    ]
 )
 
 def index(request):
-    return HttpResponse("BlogMaker Lite")
+    """
+    switch the index page over to using the template setup
+    """
+    return render(request=request, template_name="index.html")
 
 def bob(request):
     title = "Blog title"
