@@ -14,7 +14,11 @@ def index(request):
     return HttpResponse("BlogMaker Lite")
 
 def bob(request):
-    return HttpResponse("Hi Bob!")
+    title = "Blog title"
+    desc = "Blog seed!"
+    page_text = f"<h1>{title}</h1>"
+    page_text += f"<p>{desc}</p>"
+    return HttpResponse(page_text)
 
 urlpatterns = [
     path("", index),
