@@ -5,10 +5,10 @@ from django.core.management import execute_from_command_line
 from django.shortcuts import render
 # import admin console code and Blog model 
 from django.contrib import admin 
-from blogs.models import Blog
+from blogs.models import Blog, BlogPost
 
-# tells the admin console to manage the Blog model by registering it
-admin.site.register(Blog)
+# tells the admin console to manage the Blog and BlogPost models by registering them
+admin.site.register(Blog, BlogPost)
 
 
 def index(request):
